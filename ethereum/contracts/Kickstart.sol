@@ -14,11 +14,12 @@ contract Kickstart {
     }
     
     mapping(uint => Request) public requests;
+    mapping(address  => bool) public approvers;
+
     uint private currentIndex;
     
     address payable public manager;
     uint public minimumContribution;
-    mapping(address  => bool) public approvers;
     uint public approversCount;
 
     modifier restricted  {
@@ -34,8 +35,12 @@ contract Kickstart {
     function contribute() public payable {
         require(msg.value > minimumContribution, 'To contribute you need to atleast pay minimumContribution ${minimumContribution}');
         
-        approvers[msg.sender] = true;
-        approversCount++;
+        // if the user has not already been added as an approver
+        if(!approvers[msg.sender]) {
+            approvers[msg.sender] = true;
+
+            approversCount++;
+        }
     }
 
     function createRequest(string memory description, uint256 value, address payable recipient) external restricted {
