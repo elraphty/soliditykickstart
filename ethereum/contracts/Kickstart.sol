@@ -64,4 +64,17 @@ contract Kickstart {
         // increase the request approval count
         request.approvalCount++;
     }
+
+    // To finalize a request, the appovers count must be more than 50% of the total approvers
+    function finalizeRequest(uint indexOfRequest) external restricted {
+        Request storage request = requests[indexOfRequest];
+
+        // The approvers count must be greater than half of the approvers
+        require(request.approvalCount > (approversCount / 2), "More approvers are needed for finalizing this request");
+        require(!request.complete, 'Request is already completed');
+
+        // If successful transfer the eth value to the recipient and set completed to true
+        request.recipient.transfer(request.value);
+        request.complete = true;
+    }
 }
