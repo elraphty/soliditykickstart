@@ -37,4 +37,16 @@ contract Kickstart {
         approvers[msg.sender] = true;
         approversCount++;
     }
+
+    function createRequest(string memory description, uint256 value, address payable recipient) external restricted {
+        Request storage request = requests[currentIndex];
+
+        request.description = description;
+        request.value = value;
+        request.recipient = recipient;
+        request.complete = false;
+        request.approvalCount = 0;
+
+        currentIndex++;
+    }
 }
