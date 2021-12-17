@@ -3,6 +3,7 @@
 pragma solidity >=0.5.2 <0.9.0;
 
 contract Kickstart {
+
     struct Request   {
       string  description;
       uint value;
@@ -20,8 +21,20 @@ contract Kickstart {
     mapping(address  => bool) public approvers;
     uint public approversCount;
 
+    modifier restricted  {
+        require(msg.sender == manager);
+        _;
+    }
+
     constructor(uint minimum, address payable creator) {
         manager = creator;
         minimumContribution = minimum;
+    }
+
+    function contribute() public payable {
+        require(msg.value > minimumContribution, 'To contribute you need to atleast pay minimumContribution ${minimumContribution}');
+        
+        approvers[msg.sender] = true;
+        approversCount++;
     }
 }
