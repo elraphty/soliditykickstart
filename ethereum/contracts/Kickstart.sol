@@ -45,8 +45,23 @@ contract Kickstart {
         request.value = value;
         request.recipient = recipient;
         request.complete = false;
+
+        // Set the request approval count to 0
         request.approvalCount = 0;
 
         currentIndex++;
+    }
+
+    function approveRequest(uint indexOfRequest) external {
+        Request storage request = requests[indexOfRequest];
+        
+        // The user must be among the approvers, and must have not approved the request before
+        require(approvers[msg.sender]);
+        require(!request.approvals[msg.sender]);
+
+        request.approvals[msg.sender] = true;
+
+        // increase the request approval count
+        request.approvalCount++;
     }
 }
