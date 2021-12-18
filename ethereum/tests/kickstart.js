@@ -37,4 +37,9 @@ describe('KickstartCampaigns', () => {
     assert.ok(factory.options.address);
     assert.ok(campaign.options.address);
   });
+
+  it('marks caller as the campaign manager', async () => {
+    const manager = await campaign.methods.manager().call();
+    assert.equal(manager, accounts[0]);
+  });
 });
