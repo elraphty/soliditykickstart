@@ -54,6 +54,22 @@ describe('KickstartCampaigns', () => {
     assert.ok(approverExists);
   });
 
+  it('it does not allow  a contributor to be added as an approver more than once', async () => {
+    await campaign.methods.contribute().send({
+      value: '200',
+      from: accounts[1],
+    });
+
+    await campaign.methods.contribute().send({
+      value: '200',
+      from: accounts[1],
+    });
+
+    const approversCount = await campaign.methods.approversCount().call();
+    
+    assert.equal(approversCount, 1);
+  });
+
   it('requires a minimum contribution', async () => {
     try {
       await campaign.methds.contribute().send({
