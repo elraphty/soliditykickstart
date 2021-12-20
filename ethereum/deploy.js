@@ -1,7 +1,7 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
 
-const compiledFactory = require('./build/KickstartFactory.json');
+const compiledFactory = require('./build/KickstartFactory.json').KickstartFactory;
 require('dotenv').config();
 
 const provider = new HDWalletProvider(
@@ -16,7 +16,7 @@ const deploy = async () => {
   console.log('Attempting to deploy using account ' + accounts[0]);
 
   const txn = await new web3.eth.Contract(compiledFactory.abi)
-    .deploy({ data: compiledFactory.evm.bytecode.object })
+    .deploy({ data:  '0x' + compiledFactory.evm.bytecode.object })
     .send({ from: accounts[0] });
 
   console.log('Contract is at ' + txn.options.address);
