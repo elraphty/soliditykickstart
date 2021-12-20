@@ -1,4 +1,4 @@
-import {Kickstart as Campaign} from './build/Campaign.json';
+import {Kickstart as Campaign} from './build/Kickstart.json';
 import web3 from './web3';
 
 const kickstart = (address) => {

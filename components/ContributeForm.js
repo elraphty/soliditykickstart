@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form, Input, Message, Button } from 'semantic-ui-react';
-import Campaign from '../ethereum/campaign';
+import Campaign from '../ethereum/kickstart';
 import web3 from '../ethereum/web3';
 import { useRouter } from 'next/router';
 
