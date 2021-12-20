@@ -2,7 +2,6 @@ import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import ContributeForm from '../../components/ContributeForm';
 import Campaign from '../../ethereum/kickstart';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from "next/link";
 import web3 from '../../ethereum/web3';
