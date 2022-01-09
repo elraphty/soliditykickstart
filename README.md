@@ -13,20 +13,33 @@ To use, you have to install metamask extension on your browser
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
+  npm run install
+  # or
+  yarn install
+  
+  npm run dev
+  # or
+  yarn dev
 ```
 
 ## Test
 ```
-npm run test_contract
+  npm run test_contract
 ```
 
 ## Deploy
+
+Create a dotenv file and update these ENV variables
+
 ```
-npm run compile
-npm run deploy
+  WALLET_MNEMONIC="" // Your metamask wallet mnemomic words
+  INFURA_ENDPOINT="" // infura project endpoint
+  FACTORY_ADDRESS="" // factory address after deployment
+```
+
+```
+  npm run compile
+  npm run deploy
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
